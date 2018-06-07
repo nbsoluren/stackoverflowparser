@@ -1,77 +1,64 @@
 from bs4 import BeautifulSoup
-
 import requests
 
-class StackObject:
-   def __init__(self,question, description, answers, upvotes, authors):
-      self.question = question
-      self.authors = authors
-      self.upvotes = upvotes
-      self.description = description
-      self.answers = answers
-
-
-data = {}
-data["answers"] = {}
-data["question"] = {}
-
-print(data)
+#asks for user input
 url = input("Enter Stack Overflow URL: ")
 
+#initialization
 r  = requests.get(url)
 data = r.text
 soup = BeautifulSoup(data,"html.parser")
 
-
-
-#Prints the Question of Stack Overflow
+#Retrieves the question
 question = soup.find('a', {"class": "question-hyperlink"}).text
 
+#Retrieve question Description
 description = ""
-postcell = soup.findAll("div", {"class": "postcell"})
-for desc in postcell:
-    textblock = desc.findAll("div", {"class": "post-text"})
-    for p in textblock:
-        p = desc.findAll(['p','code'])
-        for fin in p:
+postAuthors = []
+for desc in soup.findAll("div", {"class": "postcell"}):
+    for p in desc.findAll("div", {"class": "post-text"}):
+        for fin in desc.findAll(['p','code']):
             if(fin.name == 'code'):
                 description += '\t'+fin.text+'\n'
             else:
                 description += fin.text+'\n'
+    for p in desc.findAll("div", {"class": "user-details"}):
+        for fin in p.findAll(['a']):
+            postAuthors.append(fin.text)
 
-answers = []
-answercell = soup.findAll("div", {"class": "answercell"})
-for ans in answercell:
+
+
+#Retrieves # of upvotes
+upvotes = soup.find("span", {"class": "vote-count-post"}).text
+
+#Retrieves answers of the question
+answers =[]
+for ans in soup.findAll("div", {"class": "answercell"}):
+    pseudoans = {}
+    ansAuthors = []
     anstext = ""
-    textblock = ans.findAll("div", {"class": "post-text"})
-    for p in textblock:
-        p = ans.findAll(['p','code'])
-        for fin in p:
+    for p in ans.findAll("div", {"class": "post-text"}):
+        for fin in ans.findAll(['p','code']):
             if(fin.name == 'code'):
                 anstext += ('\t'+fin.text+'\n')
             else:
                 anstext += (fin.text+'\n')
-    answers.append(anstext)
-
-authors = []
-postcell = soup.findAll("div", {"class": "postcell"})
-for ans in postcell:
-    textblock = ans.findAll("div", {"class": "user-details"})
-    for p in textblock:
-        k = p.findAll(['a'])
-        for fin in k:
-            authors.append(fin.text)
-
-upvotes = soup.find("span", {"class": "vote-count-post"}).text
+    for p in ans.findAll("div", {"class": "user-details"}):
+        for fin in p.findAll(['a']):
+            ansAuthors.append(fin.text)
+    pseudoans["answer"] = anstext
+    pseudoans["authors"] = ansAuthors
+    answers.append(pseudoans)
 
 
+#Putting it all together
 data = {}
 data["question"] = {
     "header": question,
     "description": description,
-    "authors": authors,
+    "authors": postAuthors,
     "upvotes": upvotes
 }
-data["answers"] = [{}]
+data["answers"] = answers
 
 print(data)
