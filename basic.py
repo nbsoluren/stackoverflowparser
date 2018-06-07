@@ -2,25 +2,32 @@ from bs4 import BeautifulSoup
 
 import requests
 
-file = open("mydivs.txt","a")
+class StackObject:
+   def __init__(self,question, description, answers, upvotes, authors):
+      self.question = question
+      self.authors = authors
+      self.upvotes = upvotes
+      self.description = description
+      self.answers = answers
 
+
+data = {}
+data["answers"] = {}
+data["question"] = {}
+
+print(data)
 url = input("Enter Stack Overflow URL: ")
 
 r  = requests.get(url)
-
 data = r.text
-
 soup = BeautifulSoup(data,"html.parser")
 
-#This parses the content
-title = soup.find('title')
+
 
 #Prints the Question of Stack Overflow
-print (title.renderContents())
-file.write("Question: "+soup.find('a', {"class": "question-hyperlink"}).text + '\n')
-file.write('\n')
-#Print Details of the question
-file.write('Description of QUestion:')
+question = soup.find('a', {"class": "question-hyperlink"}).text
+
+description = ""
 postcell = soup.findAll("div", {"class": "postcell"})
 for desc in postcell:
     textblock = desc.findAll("div", {"class": "post-text"})
@@ -28,34 +35,43 @@ for desc in postcell:
         p = desc.findAll(['p','code'])
         for fin in p:
             if(fin.name == 'code'):
-                file.write ("code:"+'\n')
-                file.write ('\t'+fin.text+'\n')
+                description += '\t'+fin.text+'\n'
             else:
-                file.write (fin.text+'\n')
+                description += fin.text+'\n'
 
-
-
-ansCnt = 0
+answers = []
 answercell = soup.findAll("div", {"class": "answercell"})
 for ans in answercell:
-    ansCnt+=1
-    file.write("Answer #: " + str(ansCnt) + '\n')
+    anstext = ""
     textblock = ans.findAll("div", {"class": "post-text"})
     for p in textblock:
         p = ans.findAll(['p','code'])
         for fin in p:
             if(fin.name == 'code'):
-                file.write ("code:"+'\n')
-                file.write ('\t'+fin.text+'\n')
+                anstext += ('\t'+fin.text+'\n')
             else:
-                file.write (fin.text+'\n')
+                anstext += (fin.text+'\n')
+    answers.append(anstext)
+
+authors = []
+postcell = soup.findAll("div", {"class": "postcell"})
+for ans in postcell:
+    textblock = ans.findAll("div", {"class": "user-details"})
+    for p in textblock:
+        k = p.findAll(['a'])
+        for fin in k:
+            authors.append(fin.text)
+
+upvotes = soup.find("span", {"class": "vote-count-post"}).text
 
 
-mydivs = soup.findAll("div", {"class": "answercell"})
-# print(mydivs)
+data = {}
+data["question"] = {
+    "header": question,
+    "description": description,
+    "authors": authors,
+    "upvotes": upvotes
+}
+data["answers"] = [{}]
 
-
-
-#
-# file.write(str(mydivs))
-file.close()
+print(data)
