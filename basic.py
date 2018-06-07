@@ -37,6 +37,7 @@ answers =[]
 for ans in soup.findAll("div", {"class": "answercell"}):
     pseudoans = {}
     ansAuthors = []
+    comments = []
     anstext = ""
     upvotesans = ""
     for p in ans.findAll("div", {"class": "post-text"}):
@@ -65,7 +66,8 @@ data["question"] = {
     "header": question,
     "description": description,
     "authors": postAuthors,
-    "upvotes": upvotes
+    "upvotes": upvotes,
+    "comments": comments
 }
 data["answers"] = answers
 
