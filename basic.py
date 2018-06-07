@@ -2,7 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 
 #asks for user input
-url = input("Enter Stack Overflow URL: ")
+#url = input("Enter Stack Overflow URL: ")
+url = 'https://stackoverflow.com/questions/645312/what-is-the-quickest-way-to-http-get-in-python'
 
 #initialization
 r  = requests.get(url)
@@ -37,6 +38,7 @@ for ans in soup.findAll("div", {"class": "answercell"}):
     pseudoans = {}
     ansAuthors = []
     anstext = ""
+    upvotesans = ""
     for p in ans.findAll("div", {"class": "post-text"}):
         for fin in ans.findAll(['p','code']):
             if(fin.name == 'code'):
@@ -46,8 +48,14 @@ for ans in soup.findAll("div", {"class": "answercell"}):
     for p in ans.findAll("div", {"class": "user-details"}):
         for fin in p.findAll(['a']):
             ansAuthors.append(fin.text)
+
+
+    upvotesans = ans.find_previous_sibling().find("span", {"class": "vote-count-post"}).text
+
+
     pseudoans["answer"] = anstext
     pseudoans["authors"] = ansAuthors
+    pseudoans["upvotes"] = upvotesans
     answers.append(pseudoans)
 
 
