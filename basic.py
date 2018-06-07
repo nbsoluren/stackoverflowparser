@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 
 import requests
 
+file = open("mydivs.txt","a")
+
 url = input("Enter Stack Overflow URL: ")
 
 r  = requests.get(url)
@@ -15,11 +17,24 @@ title = soup.find('title')
 
 #Prints the Question of Stack Overflow
 print (title.renderContents())
-file = open("mydivs.txt","a")
+file.write("Question: "+soup.find('a', {"class": "question-hyperlink"}).text + '\n')
+file.write('\n')
+#Print Details of the question
+file.write('Description of QUestion:')
+postcell = soup.findAll("div", {"class": "postcell"})
+for desc in postcell:
+    textblock = desc.findAll("div", {"class": "post-text"})
+    for p in textblock:
+        p = desc.findAll(['p','code'])
+        for fin in p:
+            if(fin.name == 'code'):
+                file.write ("code:"+'\n')
+                file.write ('\t'+fin.text+'\n')
+            else:
+                file.write (fin.text+'\n')
 
-# p_tags = soup.find(class_="user-review").find_all('p')
-# for p in p_tags[1:]: #find all p tag and exclude the first one
-#     print(p.text)
+
+
 ansCnt = 0
 answercell = soup.findAll("div", {"class": "answercell"})
 for ans in answercell:
