@@ -3,3 +3,4 @@ references:
 https://stackoverflow.com/questions/19476232/save-file-dialog-in-tkinter
 https://stackoverflow.com/questions/275018/how-can-i-remove-chomp-La-trailing-newline-in-python
 https://stackoverflow.com/questions/645312/what-is-the-quickest-way-to-http-get-in-python
+https://stackoverflow.com/questions/26745519/converting-dictionary-to-json-in-python
