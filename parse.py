@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import json
-def main(url):
+def stackParser(url):
 
     #initialization
     r = requests.get(url)
@@ -9,15 +9,17 @@ def main(url):
     soup = BeautifulSoup(data,"html.parser")
     #Putting it all together
     data = {}
-    data["question"] = stackParser(soup,"question")[0]
-    data["answers"] = stackParser(soup, "answers")
+    data["question"] = partParser(soup,"question")[0]
+    data["answers"] = partParser(soup, "answers")
 
-    print(json.dumps(data))
+    return json.dumps(data)
+
+    # print(json.dumps(data))
 
 
 
 
-def stackParser(soup,type):
+def partParser(soup,type):
 
     key = "answercell"
     #retrieves header if question
@@ -62,5 +64,5 @@ def stackParser(soup,type):
 
 
 
-url = 'https://stackoverflow.com/questions/645312/what-is-the-quickest-way-to-http-get-in-python'
-main(url)
+# url = 'https://stackoverflow.com/questions/645312/what-is-the-quickest-way-to-http-get-in-python'
+# main(url)

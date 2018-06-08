@@ -1,0 +1,351 @@
+[<div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>Python 2.x:</p>
+<pre><code>import urllib2
+contents = urllib2.urlopen("http://example.com/foo/bar").read()
+</code></pre>
+<p>Python 3.x:</p>
+<pre><code>import urllib.request
+contents = urllib.request.urlopen("http://example.com/foo/bar").read()
+</code></pre>
+<p>Documentation for <a href="https://docs.python.org/3.5/library/urllib.request.html" rel="noreferrer">urllib.request</a> and <a href="https://docs.python.org/3.3/tutorial/inputoutput.html#methods-of-file-objects" rel="noreferrer">read</a>.</p>
+<p>How is that?</p>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/645318" id="link-post-645318" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/645318/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+<div class="user-action-time">
+<a href="/posts/645318/revisions" title="show all edits to this post">edited <span class="relativetime" title="2018-02-27 22:14:11Z">Feb 27 at 22:14</span></a>
+</div>
+<div class="user-gravatar32">
+<a href="/users/537980/ctrl-alt-delor"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://i.stack.imgur.com/DZUB4.png?s=32&amp;g=1" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/537980/ctrl-alt-delor">ctrl-alt-delor</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">3,921</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="19 silver badges"><span class="badge2"></span><span class="badgecount">19</span></span><span title="41 bronze badges"><span class="badge3"></span><span class="badgecount">41</span></span>
+</div>
+</div>
+</div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2009-03-14 03:48:24Z">Mar 14 '09 at 3:48</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/40906/nick-presta"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/b4a08356600e1e28141b0d9fa60cbf74?s=32&amp;d=identicon&amp;r=PG" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/40906/nick-presta">Nick Presta</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score 22,399">22.4k</span><span title="5 gold badges"><span class="badge1"></span><span class="badgecount">5</span></span><span title="45 silver badges"><span class="badge2"></span><span class="badgecount">45</span></span><span title="70 bronze badges"><span class="badge3"></span><span class="badgecount">70</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>, <div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>You could use a library called <a href="http://docs.python-requests.org/en/latest/">requests</a>.</p>
+<pre><code>import requests
+r = requests.get("http://example.com/foo/bar")
+</code></pre>
+<p>This is quite easy. Then you can do like this:</p>
+<pre><code>&gt;&gt;&gt; print r.status_code
+&gt;&gt;&gt; print r.headers
+&gt;&gt;&gt; print r.content
+</code></pre>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/15869929" id="link-post-15869929" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/15869929/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+<a href="/posts/15869929/revisions" title="show all edits to this post">edited <span class="relativetime" title="2014-05-05 05:20:15Z">May 5 '14 at 5:20</span></a>
+</div>
+<div class="user-gravatar32">
+</div>
+<div class="user-details">
+<div class="-flair">
+</div>
+</div>
+</div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2013-04-08 01:30:40Z">Apr 8 '13 at 1:30</span>
+</div>
+<div class="user-gravatar32">
+<span class="anonymous-gravatar"></span>
+</div>
+<div class="user-details">
+        user1001237
+        <div class="-flair">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>, <div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>If you want solution with httplib2 to be oneliner consider instatntinating anonymous Http object</p>
+<pre><code>import httplib2
+resp, content = httplib2.Http().request("http://example.com/foo/bar")
+</code></pre>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/646213" id="link-post-646213" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/646213/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2009-03-14 16:40:06Z">Mar 14 '09 at 16:40</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/78087/to-chomik"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/242516374f22a2c1c531c57ed8702144?s=32&amp;d=identicon&amp;r=PG" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/78087/to-chomik">to-chomik</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">331</span><span title="2 silver badges"><span class="badge2"></span><span class="badgecount">2</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>, <div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>Have a look at <a href="https://github.com/httplib2/httplib2" rel="nofollow noreferrer">httplib2</a>, which - next to a lot of very useful features - provides exactly what you want.</p>
+<pre><code>import httplib2
+
+resp, content = httplib2.Http().request("http://example.com/foo/bar")
+</code></pre>
+<p>Where content would be the response body (as a string), and resp would contain the status and response headers.</p>
+<p>It doesn't come included with a standard python install though (but it only requires standard python), but it's definitely worth checking out.</p>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/646159" id="link-post-646159" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/646159/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+<div class="user-action-time">
+<a href="/posts/646159/revisions" title="show all edits to this post">edited <span class="relativetime" title="2017-09-29 10:12:06Z">Sep 29 '17 at 10:12</span></a>
+</div>
+<div class="user-gravatar32">
+<a href="/users/911912/hennr"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/0fd60230278eef1027f1ee9c78644105?s=32&amp;d=identicon&amp;r=PG" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/911912/hennr">hennr</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">1,592</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="22 bronze badges"><span class="badge3"></span><span class="badgecount">22</span></span>
+</div>
+</div>
+</div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2009-03-14 16:13:13Z">Mar 14 '09 at 16:13</span>
+</div>
+<div class="user-gravatar32">
+<span class="anonymous-gravatar"></span>
+</div>
+<div class="user-details">
+        Steven
+        <div class="-flair">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>, <div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>theller's solution for wget is really useful, however, i found it does not print out the progress throughout the downloading process. It's perfect if you add one line after the print statement in reporthook.</p>
+<pre><code>import sys, urllib
+
+def reporthook(a, b, c):
+    print "% 3.1f%% of %d bytes\r" % (min(100, float(a * b) / c * 100), c),
+    sys.stdout.flush()
+for url in sys.argv[1:]:
+    i = url.rfind("/")
+    file = url[i+1:]
+    print url, "-&gt;", file
+    urllib.urlretrieve(url, file, reporthook)
+print
+</code></pre>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/2003547" id="link-post-2003547" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/2003547/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2010-01-05 01:21:33Z">Jan 5 '10 at 1:21</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/243431/xuan"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/a7292dc836388c118944f6069f43f272?s=32&amp;d=identicon&amp;r=PG" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/243431/xuan">Xuan</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">3,258</span><span title="24 silver badges"><span class="badge2"></span><span class="badgecount">24</span></span><span title="26 bronze badges"><span class="badge3"></span><span class="badgecount">26</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>, <div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>Here is a wget script in Python:</p>
+<pre><code># From python cookbook, 2nd edition, page 487
+import sys, urllib
+
+def reporthook(a, b, c):
+    print "% 3.1f%% of %d bytes\r" % (min(100, float(a * b) / c * 100), c),
+for url in sys.argv[1:]:
+    i = url.rfind("/")
+    file = url[i+1:]
+    print url, "-&gt;", file
+    urllib.urlretrieve(url, file, reporthook)
+print
+</code></pre>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/646229" id="link-post-646229" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/646229/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2009-03-14 16:47:32Z">Mar 14 '09 at 16:47</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/65023/theller"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/f6f46a03c2ed59f6dbfd34c6d2b63da2?s=32&amp;d=identicon&amp;r=PG" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/65023/theller">theller</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">2,226</span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="15 bronze badges"><span class="badge3"></span><span class="badgecount">15</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>, <div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>Excellent solutions Xuan, Theller.</p>
+<p>For it to work with python 3 make the following changes</p>
+<pre><code>import sys, urllib.request
+
+def reporthook(a, b, c):
+    print ("% 3.1f%% of %d bytes\r" % (min(100, float(a * b) / c * 100), c))
+    sys.stdout.flush()
+for url in sys.argv[1:]:
+    i = url.rfind("/")
+    file = url[i+1:]
+    print (url, "-&gt;", file)
+    urllib.request.urlretrieve(url, file, reporthook)
+print
+</code></pre>
+<p>Also, the URL you enter should be preceded by a "http://", otherwise it returns a unknown url type error.</p>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/31029124" id="link-post-31029124" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/31029124/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2015-06-24 14:18:05Z">Jun 24 '15 at 14:18</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/4582045/akshar"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/eec80e0c8aba555ebfb1ace1f29fb84b?s=32&amp;d=identicon&amp;r=PG&amp;f=1" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/4582045/akshar">Akshar</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">409</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>, <div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>If you are working with HTTP APIs specifically, there are also more convenient choices such as <a href="https://github.com/kimmobrunfeldt/nap" rel="nofollow">Nap</a>.</p>
+<p>For example, here's how to get gists from Github since <em>May 1st 2014</em>:</p>
+<pre><code>from nap.url import Url
+api = Url('https://api.github.com')
+
+gists = api.join('gists')
+response = gists.get(params={'since': '2014-05-01T00:00:00Z'})
+print(response.json())
+</code></pre>
+<p>More examples: <a href="https://github.com/kimmobrunfeldt/nap#examples" rel="nofollow">https://github.com/kimmobrunfeldt/nap#examples</a></p>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/23813181" id="link-post-23813181" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/23813181/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+<a href="/posts/23813181/revisions" title="show all edits to this post">edited <span class="relativetime" title="2014-05-22 17:15:49Z">May 22 '14 at 17:15</span></a>
+</div>
+<div class="user-gravatar32">
+</div>
+<div class="user-details">
+<div class="-flair">
+</div>
+</div>
+</div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info ">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2014-05-22 17:08:22Z">May 22 '14 at 17:08</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/1446092/kimmo"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/b2b65dd7af1bc771ae68772bf0219830?s=32&amp;d=identicon&amp;r=PG" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/1446092/kimmo">Kimmo</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">1,021</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="23 bronze badges"><span class="badge3"></span><span class="badgecount">23</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>, <div class="answercell post-layout--right">
+<div class="post-text" itemprop="text">
+<p>Without further necessary imports this solution works (for me) - also with https:</p>
+<pre><code>try:
+    import urllib2 as urlreq # Python 2.x
+except:
+    import urllib.request as urlreq # Python 3.x
+req = urlreq.Request("http://example.com/foo/bar")
+req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36')
+urlreq.urlopen(req).read()
+</code></pre>
+<p>I often have difficulty grabbing the content when not specifying a "User-Agent" in the header information. Then usually the requests are cancelled with something like: <code>urllib2.HTTPError: HTTP Error 403: Forbidden</code> or <code>urllib.error.HTTPError: HTTP Error 403: Forbidden</code>.</p>
+</div>
+<div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+<div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a class="short-link" href="/a/48050751" id="link-post-48050751" title="short permalink to this answer">share</a><span class="lsep">|</span><a class="suggest-edit-post" href="/posts/48050751/edit" title="">improve this answer</a></div> </div>
+<div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+<div class="user-action-time">
+        answered <span class="relativetime" title="2018-01-01 15:11:48Z">Jan 1 at 15:11</span>
+</div>
+<div class="user-gravatar32">
+<a href="/users/2056545/michael-s"><div class="gravatar-wrapper-32"><img alt="" height="32" src="https://www.gravatar.com/avatar/c802f6f0c6ca5e775a808ff6c4567410?s=32&amp;d=identicon&amp;r=PG" width="32"/></div></a>
+</div>
+<div class="user-details">
+<a href="/users/2056545/michael-s">michael_s</a>
+<div class="-flair">
+<span class="reputation-score" dir="ltr" title="reputation score ">2,081</span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="21 bronze badges"><span class="badge3"></span><span class="badgecount">21</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>]
